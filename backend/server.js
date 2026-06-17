@@ -239,7 +239,8 @@ app.get('/api/admin/analytics', authenticate, requireAdmin, async (req, res) => 
 
 // --- BOOTSTRAP CONNECTION ---
 const PORT = process.env.PORT || 5000;
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/moderation')
+// Changed 'localhost' to 'mongo' to route correctly inside the Docker Compose bridge network
+mongoose.connect(process.env.MONGO_URI || 'mongodb://mongo:27017/moderation')
   .then(() => {
     console.log('MongoDB Engine Pipeline Online.');
     seedDatabase();
